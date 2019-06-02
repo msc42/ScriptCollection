@@ -29,7 +29,8 @@ def updateHashObjectWithFile(hashObject, file, ignoreHiddenFiles):
                 updateHashObjectWithFile(hashObject, os.path.join(file, fileInDir), ignoreHiddenFiles)
     else:
         print(file)
-        hashObject.update(open(file, 'rb').read())
+        with open(file, 'rb') as openedFile:
+            hashObject.update(openedFile.read())
 
 
 def calculateHash(files, ignoreHiddenFiles):

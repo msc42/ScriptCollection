@@ -33,9 +33,9 @@ def updateHashObjectWithFile(hashObject, file, ignoreHiddenFiles):
             hashObject.update(openedFile.read())
 
 
-def calculateHash(files, ignoreHiddenFiles):
+def calculateHash(files, ignoreHiddenFiles, hashAlgorithm):
     if len(files) >= 1:
-        hashObject = hashlib.sha512()
+        hashObject = hashlib.new(hashAlgorithm)
 
         for file in sorted(files):
             updateHashObjectWithFile(hashObject, file, ignoreHiddenFiles)
@@ -46,12 +46,15 @@ def calculateHash(files, ignoreHiddenFiles):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description='Calculates one SHA-512 hash of multiple given files. '
+        description='Calculates one hash of multiple given files. '
         'The aggregated hash depends on the order of the files. '
         'The order of the files and the aggregated hash is printed on the standard output.')
     parser.add_argument('files', metavar='FILES', type=str, nargs='+',
-                        help='the files to hash (the aggregated hash depends on the order)')
+                        help='the files to hash (the aggregated hash depends on the order, the files are sorted)')
     parser.add_argument('-i', '--ignoreHiddenFiles', action='store_true', help='ignore hidden files')
+    parser.add_argument('-a', '--hashAlgorithm', metavar='HASH_ALGORITHM', type=str, default='sha512',
+        help='the algorithm for calculating the hash (default is sha512, available on this system: ' +
+        ', '.join(hashlib.algorithms_available)  + ')')
     args = parser.parse_args()
 
-    calculateHash(args.files, args.ignoreHiddenFiles)
+    calculateHash(args.files, args.ignoreHiddenFiles, args.hashAlgorithm)

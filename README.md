@@ -1,4 +1,4 @@
 # ScriptCollection
 A collection of scripts.
 
-* aggsha512sum Calculates one SHA-512 hash of multiple given files.
+* hashsum Calculates one hash of multiple given files (the hash algorithm is selectable, the default hash algorithm is SHA-512).

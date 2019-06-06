@@ -22,7 +22,7 @@ import hashlib
 import os
 
 
-def updateHashObjectWithFile(hashObject, file, ignoreHiddenFiles):
+def updateHashObjectWithFile(hashObject, file, ignoreHiddenFiles=False):
     if os.path.isdir(file):
         for fileInDir in sorted(os.listdir(file)):
             if not ignoreHiddenFiles or not fileInDir.startswith('.'):
@@ -33,7 +33,7 @@ def updateHashObjectWithFile(hashObject, file, ignoreHiddenFiles):
             hashObject.update(openedFile.read())
 
 
-def calculateHash(files, ignoreHiddenFiles, hashAlgorithm):
+def calculateHash(files, ignoreHiddenFiles=False, hashAlgorithm='sha512'):
     if len(files) >= 1:
         hashObject = hashlib.new(hashAlgorithm)
 

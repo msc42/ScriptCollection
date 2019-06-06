@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2017 Stefan Constantin
+# Copyright (C) 2017-2019 Stefan Constantin
 #
 # This file is part of msc42's ScriptCollection.
 #
